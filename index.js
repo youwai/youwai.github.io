@@ -24,8 +24,8 @@ onValue(recordRef, (snapshot) => {
         addRow(data[i]);
     }
 
-    createDoughnutChart(data, 1, 'Storage Remaining (ml)', 'doug-chart');
-    createDoughnutChart(data, 5, 'Food Remaining in Plate (ml)', 'doug-chart1');
+    createDoughnutChart(data, 100, 'Storage Remaining (%)', 'doug-chart');
+    createDoughnutChart(data, 100, 'Food Remaining in Plate (%)', 'doug-chart1');
 });
 
 function addRow(data) {
@@ -35,13 +35,11 @@ function addRow(data) {
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
 
     cell1.innerHTML = data.Date;
     cell2.innerHTML = data.Time;
-    cell3.innerHTML = data['Storage Remaining (ml)'];
-    cell4.innerHTML = data['Food Remaining in Plate (ml)'];
-    cell5.innerHTML = data.Remark;
+    cell3.innerHTML = data['Storage Remaining (%)'].toFixed(2);
+    cell4.innerHTML = data['Food Remaining in Plate (%)'].toFixed(2);
 }
 
 function createDoughnutChart(data, max, type, chartID) {
