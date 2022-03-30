@@ -29,17 +29,21 @@ onValue(recordRef, (snapshot) => {
 });
 
 function addRow(data) {
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
     var table = document.getElementById("table-list");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
 
-    cell1.innerHTML = data.Date;
-    cell2.innerHTML = data.Time;
-    cell3.innerHTML = data['Storage Remaining (%)'].toFixed(2);
-    cell4.innerHTML = data['Food Remaining in Plate (%)'].toFixed(2);
+    cell1.innerHTML = weekday[new Date(data.Date).getDay()];
+    cell2.innerHTML = data.Date;
+    cell3.innerHTML = data.Time;
+    cell4.innerHTML = data['Storage Remaining (%)'].toFixed(2);
+    cell5.innerHTML = data['Food Remaining in Plate (%)'].toFixed(2);
 }
 
 function createDoughnutChart(data, max, type, chartID) {
