@@ -25,6 +25,10 @@ body {
     width: 20%;
 }
 
+.warning-text {
+  color: rgb(230, 0, 0);
+}
+
 @media only screen and (max-width: 425px) {
     .graph-section {
       flex-direction: column !important;

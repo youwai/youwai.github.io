@@ -16,6 +16,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp);
 const recordRef = ref(database, 'Records/');
+const storageRef = ref(database, 'Storage/');
 
 onValue(recordRef, (snapshot) => {
     const data = snapshot.val();
@@ -32,6 +33,30 @@ onValue(recordRef, (snapshot) => {
 
     doughnutChart(data, 100, 'Storage Remaining (%)', 'doug-chart');
     doughnutChart(data, 100, 'Food Remaining in Plate (%)', 'doug-chart1');
+});
+
+onValue(storageRef, (snapshot) => {
+    const data = snapshot.val();  
+
+    console.log(data.Sufficient);
+    if (data.Sufficient == 1) {
+      var warning = document.getElementsByClassName('warning');
+
+      document.getElementById('warning-div').style.display = "none";
+
+      for (let i = 0; i < warning.length; i++) {
+        warning[i].style.display = "none";
+      }
+    }
+    else {
+      var warning = document.getElementsByClassName('warning');
+
+      document.getElementById('warning-div').style.display = "block";
+
+      for (let i = 0; i < warning.length; i++) {
+        warning[i].style.display = "inline";
+      }
+    }
 });
 
 function addRow(data, table) {
