@@ -43,6 +43,7 @@ onValue(storageRef, (snapshot) => {
       var warning = document.getElementsByClassName('warning');
 
       document.getElementById('warning-div').style.display = "none";
+      document.getElementById('warning-span').style.display = "none";
 
       for (let i = 0; i < warning.length; i++) {
         warning[i].style.display = "none";
@@ -52,6 +53,7 @@ onValue(storageRef, (snapshot) => {
       var warning = document.getElementsByClassName('warning');
 
       document.getElementById('warning-div').style.display = "block";
+      document.getElementById('warning-span').style.display = "block";
 
       for (let i = 0; i < warning.length; i++) {
         warning[i].style.display = "inline";
