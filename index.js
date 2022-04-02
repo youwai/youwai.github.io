@@ -53,6 +53,8 @@ onValue(storageRef, (snapshot) => {
 
       document.getElementById('warning-div').style.display = "block";
 
+      //test
+
       for (let i = 0; i < warning.length; i++) {
         warning[i].style.display = "inline";
       }
