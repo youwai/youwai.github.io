@@ -102,3 +102,15 @@ function doughnutChart(data, max, type, chartID) {
           }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+

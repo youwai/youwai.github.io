@@ -43,6 +43,20 @@ body {
       width: 95%;
       margin: auto;
     }
+
+    .warn-div {
+      width:85%;
+      margin: auto;
+    }
+
+    .warning-text {
+      font-size: 1rem !important;
+    }
+
+    .warn-img {
+      width: 40px !important;
+      height: 40px !important;
+    }
   }
 
 @media only screen and (min-width: 426px) and (max-width: 860px) {
