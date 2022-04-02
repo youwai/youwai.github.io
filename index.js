@@ -20,15 +20,21 @@ const recordRef = ref(database, 'Records/');
 onValue(recordRef, (snapshot) => {
     const data = snapshot.val();
 
-    for (let i in data) {
-        addRow(data[i]);
+    const table = document.getElementById("table-list");
+
+    if (table.rows.length > 2) {
+      location.reload()
     }
 
-    createDoughnutChart(data, 100, 'Storage Remaining (%)', 'doug-chart');
-    createDoughnutChart(data, 100, 'Food Remaining in Plate (%)', 'doug-chart1');
+    for (let i in data) {
+        addRow(data[i], table);
+    }
+
+    doughnutChart(data, 100, 'Storage Remaining (%)', 'doug-chart');
+    doughnutChart(data, 100, 'Food Remaining in Plate (%)', 'doug-chart1');
 });
 
-function addRow(data) {
+function addRow(data, table) {
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
     var table = document.getElementById("table-list");
@@ -38,34 +44,36 @@ function addRow(data) {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
 
     cell1.innerHTML = weekday[new Date(data.Date).getDay()];
     cell2.innerHTML = data.Date;
     cell3.innerHTML = data.Time;
     cell4.innerHTML = data['Storage Remaining (%)'].toFixed(2);
     cell5.innerHTML = data['Food Remaining in Plate (%)'].toFixed(2);
+    cell6.innerHTML = data['Remarks'];
 }
 
-function createDoughnutChart(data, max, type, chartID) {
+function doughnutChart(data, max, type, chartID) {
     let current = data[Object.keys(data)[Object.keys(data).length-1]][type];
 
     const ctx = document.getElementById(chartID).getContext('2d');
     const dougChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: [
-                'Occupied',
-                'Empty'
+          labels: [
+              'Occupied',
+              'Empty'
+            ],
+            datasets: [{
+              label: 'My First Dataset',
+              data: [current, (max-current)],
+              backgroundColor: [
+                'rgb(255, 205, 86)',
+                'rgb(255, 99, 132)'
               ],
-              datasets: [{
-                label: 'My First Dataset',
-                data: [current, (max-current)],
-                backgroundColor: [
-                  'rgb(255, 205, 86)',
-                  'rgb(255, 99, 132)'
-                ],
-                hoverOffset: 4
-              }]
+              hoverOffset: 4
+            }]
           }
     });
 }
